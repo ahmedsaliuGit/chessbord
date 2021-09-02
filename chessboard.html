@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chess Board</title>
+    <style type="text/css">
+      #container {
+        width: 100%;
+        height: 90vh;
+        display: flex;
+        flex-wrap: wrap;
+        border: 3px solid tan;
+      }
+      .input-group {
+        display: flex;
+        width: 100%;
+        margin: 15px;
+        justify-content: center;
+      }
+      /* input {
+        width: 100%;
+      }
+      button {
+        width: 100%;
+      } */
+    </style>
+  </head>
+  <body>
+    <div class="input-group">
+      <input type="text" value="" />
+      <button onclick="generateBoard()">Generate Board</button>
+    </div>
+    <div id="container"></div>
+    <script type="text/javascript">
+      const container = document.getElementById("container");
+
+      function chessBoard(n) {
+        let columnSize = 100 / n - 1;
+
+        for (let i = 0; i < n; i++) {
+          for (let j = 0; j < n; j++) {
+            let column = document.createElement("div");
+            column.style.width = `${columnSize}%`;
+            column.style.height = `${columnSize}%`;
+            column.style.padding = "1px";
+            (i + j) % 2 === 0
+              ? (column.style.backgroundColor = "black")
+              : (column.style.backgroundColor = "white");
+            container.appendChild(column);
+          }
+        }
+      }
+
+      function generateBoard() {
+        const numb = parseInt(document.querySelector("input").value);
+        const container = (document.getElementById("container").innerHTML = "");
+
+        if (Number.isInteger(numb)) {
+          chessBoard(numb);
+        } else {
+          alert(`Please, Enter a number`);
+        }
+      }
+
+      chessBoard(5);
+    </script>
+  </body>
+</html>
